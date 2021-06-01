@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=7 format=2]
+
+[ext_resource path="res://Scripts/Spells/Spell.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Projectiles/PigletBoltProjectile.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Transmutations/PigletTransmutation.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Sprites/Icons/piglet-bolt-icon.png" type="Texture" id=4]
+[ext_resource path="res://SFX/Release.ogg" type="AudioStream" id=5]
+[ext_resource path="res://SFX/Charge.ogg" type="AudioStream" id=6]
+
+[resource]
+resource_name = "Piglet Bolt"
+script = ExtResource( 1 )
+iconTexture = ExtResource( 4 )
+transmutationScene = ExtResource( 3 )
+projectileScene = ExtResource( 2 )
+chargeSfx = ExtResource( 6 )
+releaseSfx = ExtResource( 5 )
+element = 2

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Wabberjack.ogg-07d728da20c43cace15b28c08be40aa9.oggstr"
+
+[deps]
+
+source_file="res://Music/Wabberjack.ogg"
+dest_files=[ "res://.import/Wabberjack.ogg-07d728da20c43cace15b28c08be40aa9.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

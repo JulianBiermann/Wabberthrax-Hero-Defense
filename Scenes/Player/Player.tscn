@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Sprites/Player/dark-mage-spritesheet.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Player/dark-mage-arm.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Icons/speech-bubble.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Player/ArmMovement.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Player/Player.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Projectiles/PigletBoltProjectile.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scripts/Player/SpellQueue.gd" type="Script" id=7]
+[ext_resource path="res://SFX/Frost Charge.ogg" type="AudioStream" id=8]
+[ext_resource path="res://SFX/Frost Release.ogg" type="AudioStream" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4.7648, 6.97503 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("BodySprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+availableSpells = [ ExtResource( 6 ) ]
+
+[node name="BodySprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 4
+frame = 3
+
+[node name="ArmSprite" type="Sprite" parent="."]
+position = Vector2( 1.85118, 1 )
+texture = ExtResource( 2 )
+offset = Vector2( 2.51386, 0 )
+script = ExtResource( 4 )
+
+[node name="ProjectileSpawnPoint" type="Position2D" parent="ArmSprite"]
+position = Vector2( 10.1488, 0 )
+
+[node name="SkillIconContainerSprite" type="Sprite" parent="."]
+position = Vector2( 11, -13 )
+texture = ExtResource( 3 )
+
+[node name="SpellIcon" type="Sprite" parent="SkillIconContainerSprite"]
+position = Vector2( 1, -1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/idle = SubResource( 2 )
+
+[node name="SpellQueue" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="CastDelay" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+autostart = true
+
+[node name="ChargeSfxPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+bus = "Sound Effects"
+
+[node name="ReleaseSfxPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+bus = "Sound Effects"
+
+[connection signal="spell_popped" from="SpellQueue" to="." method="onSpellQueueSpellPopped"]

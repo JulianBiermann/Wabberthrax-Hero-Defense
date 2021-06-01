@@ -1,0 +1,85 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Scripts/Transmutations/Transmutation.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Transmutations/pig-transmutation.png" type="Texture" id=2]
+[ext_resource path="res://SFX/Squeel.ogg" type="AudioStream" id=3]
+
+[sub_resource type="CircleShape2D" id=7]
+radius = 5.0
+
+[sub_resource type="Animation" id=8]
+resource_name = "move"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
+
+[sub_resource type="Curve" id=3]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 3 )
+
+[sub_resource type="ParticlesMaterial" id=5]
+emission_shape = 1
+emission_sphere_radius = 8.0
+flag_align_y = true
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 40.0
+gravity = Vector3( 0, -50, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 1.0
+angular_velocity = 100.0
+angular_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 180.0
+angle_random = 1.0
+scale = 3.0
+scale_random = 0.5
+scale_curve = SubResource( 6 )
+
+[node name="PigletTransmutation" type="KinematicBody2D"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+initialVelocity = Vector2( 10, 20 )
+gravity = Vector2( 0, -90 )
+lifetime = 3.0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "move"
+anims/move = SubResource( 8 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "Sound Effects"
+
+[node name="SmokeParticles" type="Particles2D" parent="."]
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+draw_order = 1
+process_material = SubResource( 5 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Frost Charge.ogg-1e65ad57f97ca57b4ebaf2785d35867f.oggstr"
+
+[deps]
+
+source_file="res://SFX/Frost Charge.ogg"
+dest_files=[ "res://.import/Frost Charge.ogg-1e65ad57f97ca57b4ebaf2785d35867f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

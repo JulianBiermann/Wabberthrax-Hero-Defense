@@ -1,0 +1,66 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/Transmutations/Transmutation.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Transmutations/frostbolt-transmutation.png" type="Texture" id=2]
+[ext_resource path="res://SFX/Cheese Hit.ogg" type="AudioStream" id=3]
+
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 8.0
+height = 0.0
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 1
+emission_sphere_radius = 8.0
+flag_align_y = true
+flag_disable_z = true
+direction = Vector3( 0, -1, 0 )
+spread = 40.0
+gravity = Vector3( 0, -50, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 1.0
+angular_velocity = 100.0
+angular_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 180.0
+angle_random = 1.0
+scale = 3.0
+scale_random = 0.5
+scale_curve = SubResource( 3 )
+
+[node name="FrostBoltTransmutation" type="KinematicBody2D"]
+scale = Vector2( 0.5, 0.5 )
+collision_layer = 32
+collision_mask = 0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+initialVelocity = Vector2( 10, -30 )
+gravity = Vector2( 0, 90 )
+lifetime = 3.0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 5 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "Sound Effects"
+
+[node name="SmokeParticles" type="Particles2D" parent="."]
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 1.0
+local_coords = false
+draw_order = 1
+process_material = SubResource( 4 )

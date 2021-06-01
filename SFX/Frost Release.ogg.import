@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Frost Release.ogg-5386e233e160a4b5e73bed5fdec7d825.oggstr"
+
+[deps]
+
+source_file="res://SFX/Frost Release.ogg"
+dest_files=[ "res://.import/Frost Release.ogg-5386e233e160a4b5e73bed5fdec7d825.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

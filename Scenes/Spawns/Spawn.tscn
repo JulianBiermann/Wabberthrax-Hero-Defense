@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Levels/Spawn.gd" type="Script" id=1]
+[ext_resource path="res://Sprites/Level/door.png" type="Texture" id=3]
+
+[node name="Spawn" type="Sprite"]
+texture = ExtResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="on_timer_timeout"]

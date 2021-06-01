@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Resources/Themes/DefaultTheme.tres" type="Theme" id=1]
+[ext_resource path="res://Scripts/UI/EscapeDialog.gd" type="Script" id=2]
+
+[node name="EscapeDialog" type="PopupDialog"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -256.0
+margin_bottom = -112.0
+theme = ExtResource( 1 )
+popup_exclusive = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 80.0
+margin_bottom = 56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResumeButton" type="Button" parent="VBoxContainer"]
+margin_right = 112.0
+margin_bottom = 16.0
+text = "Resume"
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer"]
+margin_top = 20.0
+margin_right = 112.0
+margin_bottom = 36.0
+text = "Settings"
+
+[node name="ExitToMenuButton" type="Button" parent="VBoxContainer"]
+margin_top = 40.0
+margin_right = 112.0
+margin_bottom = 56.0
+text = "Exit to Menu"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 60.0
+margin_right = 112.0
+margin_bottom = 68.0
+
+[node name="ExitGameButton" type="Button" parent="VBoxContainer"]
+margin_top = 72.0
+margin_right = 112.0
+margin_bottom = 88.0
+text = "Exit Game"
+
+[connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="onResumeButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="onSettingsButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/ExitToMenuButton" to="." method="onExitToMenuButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/ExitGameButton" to="." method="onExitGameButtonPressed"]
